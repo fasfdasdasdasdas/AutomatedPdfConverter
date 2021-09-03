@@ -15,7 +15,7 @@ As part of the INFO3888 project, my group and I wanted to create a way to automa
 2. There are four fields that need to be filled:
    - Enter Homepage URL
      - This is the field for the homepage of the website
-     - E.g. [https:](https://www.medicinesaustralia.com.au)
+     - E.g. https://www.medicinesaustralia.com.au
    - Enter Extension of URL
      - This field is for the exact URL for the location of PDF files
      - E.g. /code-of-conduct/transparency-reporting/health-consumer-organisation-support-reports/member-company-reports/
