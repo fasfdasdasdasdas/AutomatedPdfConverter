@@ -7,8 +7,19 @@ from urllib.error import URLError, HTTPError
 from bs4 import BeautifulSoup as soup
 import requests
 import re
+import ssl
 
 def getPdfFiles(home_url, dir_url,filedir):
+    # Create Unverified http context
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        # Legacy Python that doesn't verify HTTPS certificates by default
+        pass
+    else:
+        # Handle target environment that doesn't support HTTPS verification
+        ssl._create_default_https_context = _create_unverified_https_context
+
     url = home_url + dir_url
 
     # Create file if not created
@@ -81,6 +92,11 @@ def mergePdfFiles(filedir, year):
                     new_df = pd.DataFrame([df.columns.values.tolist()], columns=column_names)
                     df.columns = column_names
                     dfs.append(new_df)
+
+            # Check for empty pdfs
+            if len(df.index) == 0: 
+                print(filename + " is empty")
+            
             # Merge all of the separate pages
             merged = pd.concat(dfs)
             merged.reset_index(drop=True, inplace = True)
